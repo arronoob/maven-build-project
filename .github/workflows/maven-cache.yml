@@ -24,10 +24,10 @@ jobs:
 
       - name: Trigger Jenkins Job
         run: |
-          crumb=$(curl -s -u ${{ secrets.JENKINS_USER }}:${{ secrets.JENKINS_API_TOKEN }} http://172.31.44.177:8080/crumbIssuer/api/xml?xpath=concat\(//crumbRequestField,":",//crumb\))
+          crumb=$(curl -s -u ${{ secrets.JENKINS_USER }}:${{ secrets.JENKINS_API_TOKEN }} http://3.108.66.54:8080/crumbIssuer/api/xml?xpath=concat\(//crumbRequestField,":",//crumb\))
           
           echo "Crumb: $crumb"
 
-          curl -X POST http://172.31.44.177:8080/job/tomcat-deploy/build \
+          curl -X POST http://3.108.66.54:8080/job/tomcat-deploy/build \
           -u ${{ secrets.JENKINS_USER }}:${{ secrets.JENKINS_API_TOKEN }} \
           -H "$crumb"
