@@ -22,11 +22,11 @@ jobs:
         run: mvn -B package --file pom.xml  
 
       - name: Trigger Jenkins Job  
-        run: |
-          crumb=$(curl -s -u ${{ secrets.JENKINS_USER }}:${{ secrets.JENKINS_API_TOKEN }} \
-          http://172.31.44.177:8080/crumbIssuer/api/xml?xpath=concat\(//crumbRequestField,\":\",//crumb\))
+         run: |
+           crumb=$(curl -s -u ${{ secrets.JENKINS_USER }}:${{ secrets.JENKINS_API_TOKEN }} \
+           http://172.31.44.177:8080/crumbIssuer/api/xml?xpath=concat\(//crumbRequestField,\":\",//crumb\))
 
-          curl -X POST http://172.31.44.177:8080/job/tomcat-deploy/build \
-          -u ${{ secrets.JENKINS_USER }}:${{ secrets.JENKINS_API_TOKEN }} \
-          -H "$crumb"name: Java CI with Maven  
+           curl -X POST http://172.31.44.177:8080/job/tomcat-deploy/build \
+           -u ${{ secrets.JENKINS_USER }}:${{ secrets.JENKINS_API_TOKEN }} \
+           -H "$crumb"name: Java CI with Maven  
 
